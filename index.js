@@ -1,11 +1,11 @@
-// Event listener for clicks on the Drum kits
 // Leveraging Event Delegation
+// Event listener for clicks on the Drum kits
 document.querySelector(".set").addEventListener("click", function ({ target }) {
+    const { tagName, textContent } = target;
     // Listener function works only for the BUTTON element
-    if (target.tagName === "BUTTON") {
-        const key = target.textContent;
-        makeSound(key);
-        addAnimation(key);
+    if (tagName === "BUTTON") {
+        makeSound(textContent);
+        addAnimation(textContent);
     }
 });
 
