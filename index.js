@@ -1,14 +1,17 @@
 // Event listener for clicks on the Drum kits
-document.querySelector(".set").addEventListener("click", function (e) {
+document.querySelector(".set").addEventListener("click", function ({ target }) {
     // Listener function works only for the BUTTON tag
-    if (e.target.tagName === "BUTTON") {
-        makeSound(e.target.textContent);
+    if (target.tagName === "BUTTON") {
+        const key = target.textContent;
+        makeSound(key);
+        addAnimation(key);
     }
 });
 
 // Event listener for keyboard Events
-document.addEventListener("keydown", function (e) {
-    makeSound(e.key);
+document.addEventListener("keydown", function ({ key }) {
+    makeSound(key);
+    addAnimation(key);
 });
 
 // Making sound based on keys/chars
@@ -47,4 +50,15 @@ function makeSound(key) {
         default:
             alert(`Unknown Key(${key.toUpperCase()}) Pressed 💀!`);
     }
+}
+
+// Adding styles based on keys/chars
+function addAnimation(key) {
+    const activeBtn = document.querySelector(`.${key}`);
+    activeBtn.classList.add("pressed");
+
+    // Remove the "pressed" class after 200 milliseconds
+    setTimeout(() => {
+        activeBtn.classList.remove("pressed");
+    }, 200);
 }
